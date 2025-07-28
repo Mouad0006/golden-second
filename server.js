@@ -25,7 +25,7 @@ app.post('/log-success', (req, res) => {
   res.json({ ok: true });
 });
 
-// صفحة العرض العصرية
+// صفحة العرض العصرية المتطورة
 app.get('/', (req, res) => {
   let all = [];
   if (fs.existsSync(LOG_FILE)) {
@@ -37,9 +37,9 @@ app.get('/', (req, res) => {
       <td>${log.time || ''}</td>
       <td>${log.entryTime || ''}</td>
       <td>${log.isoTime ? new Date(log.isoTime).toLocaleString() : ''}</td>
-      <td style="font-size:12px;word-break:break-all">${log.href || ''}</td>
+      <td style="font-size:12px;word-break:break-all;max-width:180px;">${log.href || ''}</td>
       <td style="font-size:12px;">${log.ip || ''}</td>
-      <td style="font-size:11.3px;">${log.userAgent || ''}</td>
+      <td style="font-size:11.3px;max-width:200px;overflow:auto;">${log.userAgent || ''}</td>
     </tr>
   `).join('');
   res.send(`
@@ -51,107 +51,113 @@ app.get('/', (req, res) => {
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
       body {
-        background: linear-gradient(120deg,#fdf7e3 65%,#fff7d1 100%);
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(115deg,#0d1117 0%,#2c2e32 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', 'Cairo', Arial, sans-serif;
         margin: 0;
         padding: 0;
-        color: #604a10;
-        min-height: 100vh;
+        color: #faf9f7;
       }
       .container {
-        max-width: 1050px;
-        margin: 32px auto;
-        padding: 27px 20px 23px 20px;
-        background: rgba(255,252,220,0.88);
-        border-radius: 21px;
-        box-shadow: 0 10px 45px #ccb87122;
-        border: 2.3px solid #e4c450;
+        max-width: 1100px;
+        margin: 38px auto;
+        padding: 30px 24px 22px 24px;
+        background: rgba(26,27,30,0.98);
+        border-radius: 22px;
+        box-shadow: 0 7px 40px #1414133d;
+        border: 2.8px solid #d8ba63;
       }
       h2 {
-        color: #bfa750;
-        font-size: 2.1em;
+        color: #d8ba63;
+        font-size: 2.18em;
         font-family: 'Segoe UI', sans-serif;
         text-align: center;
-        letter-spacing: 1.4px;
-        margin-bottom: 24px;
-        text-shadow: 0 1px 2.7px #fff8;
+        letter-spacing: 1.1px;
+        margin-bottom: 29px;
+        text-shadow: 0 2px 8px #c8b27e27;
       }
       table {
         width: 100%;
         border-collapse: separate;
-        border-spacing: 0 7px;
+        border-spacing: 0 9px;
         background: none;
+        margin-bottom: 15px;
       }
       thead th {
-        background: linear-gradient(98deg,#fffbeedc 55%,#fde6a5 120%);
-        color: #bfa750;
-        padding: 11px 7px 8px 7px;
-        font-size: 1.08em;
-        font-weight: bold;
-        border-bottom: 2.2px solid #dec76b;
-        border-top-left-radius: 11px;
-        border-top-right-radius: 11px;
-        letter-spacing: .85px;
-        box-shadow: 0 3px 16px #e7cf8f13;
+        background: #1a1915e6;
+        color: #d8ba63;
+        padding: 13px 8px 10px 8px;
+        font-size: 1.09em;
+        font-weight: 700;
+        border-bottom: 2.6px solid #d8ba63bb;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        letter-spacing: .8px;
+        box-shadow: 0 1px 12px #0002;
       }
       tbody tr {
-        background: #fcf7e4;
+        background: linear-gradient(90deg,#222325e0 60%,#181818e0 100%);
         border-radius: 13px;
-        box-shadow: 0 3px 16px #e7cf8f17;
-        transition: box-shadow .16s;
+        box-shadow: 0 3px 18px #00000018;
+        transition: box-shadow .16s, background .12s;
+        color: #e8e6e3;
       }
       tbody tr:hover {
-        box-shadow: 0 6px 28px #e7cf8f24;
-        background: #fff8e3;
+        box-shadow: 0 10px 34px #d8ba6340, 0 2px 9px #0006;
+        background: linear-gradient(90deg,#242625 50%,#2b2c28 100%);
+        color: #fffcf7;
       }
       td {
-        padding: 10px 8px;
-        border-bottom: 1.2px solid #f4e7bc;
-        font-size: 1.06em;
+        padding: 11px 7px;
+        border-bottom: 1.4px solid #36332c88;
+        font-size: 1.03em;
+        max-width: 230px;
+        overflow-x: auto;
       }
       .gold-badge {
-        background: linear-gradient(93deg,#ffe9aa 60%,#f7d372 110%);
-        color: #ad8500;
-        font-weight: 700;
-        border-radius: 7px;
-        padding: 5px 12px;
-        font-size: 1.1em;
-        margin-bottom: 16px;
-        box-shadow: 0 3px 13px #e7cf8f12;
-        border: 1.3px solid #ecd37d;
+        background: linear-gradient(98deg,#fffbeec9 30%,#d8ba63 110%);
+        color: #191817;
+        font-weight: 800;
+        border-radius: 10px;
+        padding: 7px 21px;
+        font-size: 1.18em;
+        margin-bottom: 21px;
+        box-shadow: 0 3px 14px #e7cf8f09;
+        border: 2px solid #d8ba63;
         display: inline-block;
+        letter-spacing: .6px;
       }
       .delete-btn {
-        background: linear-gradient(95deg,#fff3b6,#e4c450 110%);
-        color: #775b09;
+        background: linear-gradient(92deg,#232220 20%,#d8ba63 100%);
+        color: #fff;
         border: none;
-        font-size: 1em;
+        font-size: 1.04em;
         font-family: inherit;
         font-weight: 700;
-        padding: 10px 24px;
-        border-radius: 10px;
+        padding: 11px 29px;
+        border-radius: 12px;
         cursor: pointer;
-        margin: 17px auto 13px auto;
+        margin: 19px auto 14px auto;
         display: block;
-        transition: box-shadow .12s,filter .14s;
-        box-shadow: 0 2px 10px #dcc06730;
-        letter-spacing: .9px;
+        transition: box-shadow .12s,filter .14s, background .14s, color .13s;
+        box-shadow: 0 2px 14px #d8ba6340;
+        letter-spacing: 1.1px;
       }
       .delete-btn:hover {
-        filter: brightness(1.10);
-        box-shadow: 0 5px 24px #d4bb4e38;
-        color: #bfa750;
-        background: linear-gradient(96deg,#fff6ce,#e4c450 100%);
+        filter: brightness(1.10) saturate(1.03);
+        box-shadow: 0 5px 24px #d8ba6348;
+        background: linear-gradient(92deg,#33312a 5%,#ffecbc 85%);
+        color: #ae8c13;
       }
-      @media (max-width: 800px) {
-        .container {padding:9px 1vw;}
-        td, thead th {font-size:14px;}
-        table {font-size:13.3px;}
+      @media (max-width: 900px) {
+        .container {padding:7px 2vw;}
+        td, thead th {font-size:13px;}
+        table {font-size:13.1px;}
       }
       @media (max-width: 480px) {
-        h2 {font-size:1.1em;}
+        h2 {font-size:1em;}
         .container {padding:2vw;}
-        td, thead th {font-size:11.9px;}
+        td, thead th {font-size:11.6px;}
       }
     </style>
   </head>
@@ -161,6 +167,7 @@ app.get('/', (req, res) => {
       <form method="get" action="/clear" onsubmit="return confirm('متأكد أنك تريد حذف كل السجلات؟');">
         <button class="delete-btn" type="submit">🗑️ حذف كل الطلبات</button>
       </form>
+      <h2>سجل الطلبات الناجحة</h2>
       <table>
         <thead>
           <tr>
@@ -174,7 +181,7 @@ app.get('/', (req, res) => {
           </tr>
         </thead>
         <tbody>
-          ${rows || '<tr><td colspan="8" style="text-align:center;color:#a9a176;">لا توجد طلبات</td></tr>'}
+          ${rows || '<tr><td colspan="8" style="text-align:center;color:#e7d790;">لا توجد طلبات</td></tr>'}
         </tbody>
       </table>
     </div>
@@ -182,6 +189,7 @@ app.get('/', (req, res) => {
   </html>
   `);
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
